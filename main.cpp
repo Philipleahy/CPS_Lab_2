@@ -1,8 +1,13 @@
 #include "mbed.h"
 #include "LSM6DSLSensor.h"
+#include <cmath>
 
+int main()
+{
+    while (true)  {
 #define PI 3.141592654
 
+    }
 static DevI2C devI2c(PB_11,PB_10);
 static LSM6DSLSensor acc_gyro(&devI2c,0xD4,D4,D5); // high address
 
@@ -10,11 +15,13 @@ static LSM6DSLSensor acc_gyro(&devI2c,0xD4,D4,D5); // high address
 float computeAngle(int x, int y, int z){
     //This is where we will put code
     float res = 0;
+    res = atan (x /sqrt( pow(y, 2) + pow(z, 2)));
+    res = (res * 180)/PI;
 
     return res;
 }
 
-/* Simple main function */
+//* Simple main function */
 int main() {
     uint8_t id;
     int32_t axes[3];
@@ -36,6 +43,7 @@ int main() {
 
 
         thread_sleep_for(2000);
+    }
 
     }
 }
