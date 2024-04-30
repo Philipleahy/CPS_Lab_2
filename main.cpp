@@ -2,27 +2,21 @@
 #include "LSM6DSLSensor.h"
 #include <cmath>
 
-// main() runs in its own thread in the OS
-int main()
-{
-    while (true) {
 #define PI 3.141592654
 
-    }
 static DevI2C devI2c(PB_11,PB_10);
 static LSM6DSLSensor acc_gyro(&devI2c,0xD4,D4,D5); // high address
 
 
 float computeAngle(int x, int y, int z){
     float res = 0;
-    res = atan( x /sqrt( pow(y, 2) + pow(z, 2)));
     res = atan( (float)x /sqrt( pow((float)y, 2) + pow((float)z, 2)));
     res = (res * 180)/PI;
     return res;
 }
 
 /* Simple main function */
-int main(){
+int main() {
     uint8_t id;
     int32_t axes[3];
     float res=0;
@@ -45,5 +39,4 @@ int main(){
         thread_sleep_for(2000);
 
     }
-}
 }
